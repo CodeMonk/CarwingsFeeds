@@ -9,6 +9,9 @@ import (
 	"github.com/CodeMonk/CarwingsFeeds/radar"
 )
 
+func SetupHandlersAndServe() {
+}
+
 func dumpRequest(req *http.Request) {
 	data, err := httputil.DumpRequestOut(req, true)
 	if err == nil {
@@ -27,6 +30,17 @@ func dumpRequest(req *http.Request) {
 func HomeHandler(w http.ResponseWriter, req *http.Request) {
 	dumpRequest(req)
 	io.WriteString(w, "Hello World!\n")
+}
+func TrafficHandler(w http.ResponseWriter, req *http.Request) {
+	dumpRequest(req)
+	data := `<!DOCTYPE html>
+  <html>
+  <body>
+  <img src="http://dev.virtualearth.net/REST/V1/Imagery/Map/Road/40.568550%2C-111.890546/10?mapSize=640,400&mapLayer=TrafficFlow&format=png&key=Ai_LkqQXw6AkNW30JlZggReAiw4jgWlfeTuvIN7WfviMCTAVx0t3XljxeV4sxTpO">
+  </body>
+</html>
+`
+	io.WriteString(w, data)
 }
 func WeatherHandler(w http.ResponseWriter, req *http.Request) {
 	dumpRequest(req)
